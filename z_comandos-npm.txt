@@ -1,0 +1,98 @@
+--------------------------------------------------------------------------------------------------
+// [Librerias]
+
+//Instalacion del proyecto EXPO
+https://docs.expo.dev
+comand:npx create-expo-app@latest
+
+//Instalacíon de TailWind
+https://www.nativewind.dev/quick-starts/expo
+ *npm install nativewind
+ *npm install --save-dev tailwindcss@3.3.2
+ *npx tailwindcss init
+
+
+// biblioteca de carrusel
+
+https://www.npmjs.com/package/react-native-snap-carousel?activeTab=readme
+
+> npm install react-native-snap-carouselnpm
+
+
+
+// biblioteca de Responsive
+https://www.npmjs.com/package/react-native-responsive-screen
+
+> npm i react-native-responsive-screen
+
+// biblioteca de Iconos
+https://www.npmjs.com/package/@expo/vector-icons
+
+> npm i @expo/vector-icons
+
+// biblioteca de animaciones
+https://www.npmjs.com/package/lottie-react-native
+> npm i lottie-react-native
+
+
+// firebase - Base de datos no sql
+https://console.firebase.google.com/u/0/project/app-carrete-cervecero/overview?hl=es-419
+> npm install firebase
+
+// biblioteca async storage -- sirve para almacenamiento local en aplicaciones React Native
+
+> npm i @react-native-async-storage/async-storage
+
+
+// sanity Api 
+
+https://www.sanity.io/manage/personal/project/g0lfxohl
+
+> npm create sanity@latest -- --project g0lfxohl --dataset production --template clean
+
+--Acuerdate estar dentro de la capeta app-carrete-cervecero antes de tirar este comando
+> npm run dev
+
+> npm run deploy
+
+> sanity cors add htpp://localhost:3000
+
+> npm install @sanity/image-url
+> npm install @sanity/client   
+
+
+--- redux
+Para manejar las sentencias de agregar y elminar Card
+npm install @reduxjs/toolkit react-redux
+
+
+// para actualizar el servidor
+npx sanity deploy
+
+// Libreria para el horario y la fecha
+>npm install react-native-modal-datetime-picker
+
+
+
+--------------------------------------------------------------------------------------------------
+[comandos github]
+
+- emulator -avd Pixel_8_API_35
+
+Link Guia: https://training.github.com/downloads/es_ES/github-git-cheat-sheet.pdf
+// github
+   1 git init
+   2 git status
+   4 git add .
+   5 git commit -m " "
+   6 git push origin main
+
+   // para actualizar todas las ramas
+   git fetch --all
+
+   git remote add origin https://github.com/Juan-Matias/App-carrete-cervecero-RN
+
+
+
+--------------------------------------------------------------------------------------------------
+Como crear un App 
