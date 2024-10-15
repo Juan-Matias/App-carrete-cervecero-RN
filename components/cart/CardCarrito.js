@@ -55,14 +55,14 @@ const CardCarrito = ({ item }) => {
                 </View>
             </View>
 
-            {/* Botón para vaciar el carrito */}
+            {/* Botón para vaciar el carrito 
             <View className="pl-4">
                 <Button
                     title="Vaciar Carrito"
                     onPress={clearCart} // Vaciar el carrito cuando se presione este botón
                     color="#E8A500"
                 />
-            </View>
+            </View>*/}
         </View>
     );
 };

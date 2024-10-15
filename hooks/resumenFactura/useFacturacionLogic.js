@@ -17,7 +17,7 @@ const useFacturacionLogic = (cart, total, onClose, validateForm, formValues, isB
   const [additionalBarrelPrice, setAdditionalBarrelPrice] = useState(0); // Usar useState aquí
   const navigation = useNavigation(); // Usar el hook de navegación
   const dispatch = useDispatch(); // Hook para despachar acciones de Redux
-  const { clearCart,removeFromCart } = useCartContext();
+  const { clearCart} = useCartContext();
 
   useEffect(() => {
     const fetchCommunes = async () => {
@@ -88,20 +88,16 @@ const useFacturacionLogic = (cart, total, onClose, validateForm, formValues, isB
           createdAt: Timestamp.now()
         };
 
-        // Guardar la compra en Firestore
+        // [ # Funcion ] - Guardar la compra en Firestore
         await addDoc(collection(db, 'facturacion'), purchaseData);
 
-
-
-       
-        // Limpiar el carrito
-        //console.log('Despachando CLEAR_CART',clearCart()); // Agrega este log
-       clearCart();
+        //[ # Funcion ]- Limpiar Carrito
+        clearCart();
 
         // Cerrar modal
         onClose();
         Alert.alert('Compra Exitosa', 'Tu compra fue procesada exitosamente.');
-        navigation.navigate('Home'); // Navega de vuelta a la pantalla Home
+        navigation.navigate('Orders'); // Navega de vuelta a la pantalla Home
       } catch (error) {
         Alert.alert('Error', `Error al procesar la compra: ${error.message}`);
       }
