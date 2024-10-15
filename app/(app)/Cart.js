@@ -1,17 +1,18 @@
 // Carrito.js
+import React, { useState, useEffect } from 'react';
 import { View, Image, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useDispatch, useSelector } from 'react-redux'; // Importa useDispatch y useSelector
 
-import CardCarrito from '../../components/cart/CardCarrito.js'; // Importa el nuevo componente
+import { clearCart } from '../../hooks/CartContext/useCartAction.js'; // Importa la acción clearCart
 import Facturacion from '../../components/factura/Facturacion.js';
+import CardCarrito from '../../components/cart/CardCarrito.js';
 
 const Carrito = () => {
   const navigation = useNavigation();
-  const cart = useSelector(state => state.cart.items);
+  const dispatch = useDispatch(); // Crea un dispatcher para Redux
+  const cart = useSelector((state) => state.cart.items); // Obtén los ítems del carrito desde Redux
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleSignIn = () => {
@@ -27,6 +28,18 @@ const Carrito = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  // Función que se ejecuta cuando se finaliza la compra
+  const handleCompraFinalizada = () => {
+    dispatch(clearCart()); // Despacha la acción para limpiar el carrito
+    closeModal(); // Cierra el modal
+  };
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      setModalVisible(false); // Cierra el modal si el carrito está vacío
+    }
+  }, [cart]);
 
   return (
     <View className="flex-1 p-4 bg-white">
@@ -51,11 +64,10 @@ const Carrito = () => {
         </View>
       ) : (
         <View className="flex-1">
-          {/* Lista de productos en el carrito */}
           <FlatList
-            data={cart} // Los datos a mostrar son los productos en el carrito
-            renderItem={({ item }) => <CardCarrito item={item} />} // Usa el nuevo componente
-            keyExtractor={(item) => item._id ? item._id.toString() : `${item.id}`} // Genera una clave única para cada ítem
+            data={cart} 
+            renderItem={({ item }) => <CardCarrito item={item} />}
+            keyExtractor={(item) => item._id ? item._id.toString() : `${item.id}`} 
           />
           <Button
             mode="contained"
@@ -71,6 +83,7 @@ const Carrito = () => {
             onClose={closeModal}
             cart={cart}
             total={total}
+            onCompraFinalizada={handleCompraFinalizada} // Ejecuta esta función cuando se finaliza la compra
           />
         </View>
       )}

@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { clearCart as clearReduxCart, addProductToCart } from '../../slider/cartSlice'; // Asegúrate de que esta ruta sea correcta
 
 // Crear el contexto
 export const CartContext = createContext();
@@ -10,28 +12,28 @@ export const useCartContext = () => {
 
 // Proveedor del contexto del carrito
 export const CartContextProvider = ({ children }) => {
+  const dispatch = useDispatch(); // Corrige esto
   const [cart, setCart] = useState([]); // Estado del carrito
   const [cartItemCount, setCartItemCount] = useState(0); // Estado para el contador
 
   // Función para añadir productos al carrito o incrementar su cantidad
-  // Ejemplo de cómo agregar un producto al carrito
-const addToCart = (product) => {
-  setCart(prevCart => {
-    const existingItem = prevCart.find(item => item._id === product._id);
-    if (existingItem) {
-      return prevCart.map(item => 
-        item._id === product._id 
-          ? { ...item, quantity: item.quantity + 1 } 
-          : item
-      );
-    } else {
-      return [...prevCart, { ...product, quantity: 1 }];
-    }
-  });
+  const addToCart = (product) => {
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item._id === product._id);
+      if (existingItem) {
+        return prevCart.map(item =>
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
 
-  // Si usas Redux, despacha una acción para agregar el producto al estado
-  dispatch(addProductToCart(product)); // Asegúrate de que esta acción actualice el estado correctamente
-};
+    // Despacha una acción para agregar el producto al estado en Redux
+    dispatch(addProductToCart(product)); // Asegúrate de que esta acción actualice el estado correctamente
+  };
 
   // Función para eliminar productos del carrito o decrementar su cantidad
   const removeFromCart = (productId) => {
@@ -51,15 +53,15 @@ const addToCart = (product) => {
 
   // Función para vaciar el carrito completo
   const clearCart = () => {
-    setCart([]);
+    setCart([]); // Limpia el carrito del contexto
+    dispatch(clearReduxCart()); // Limpia el carrito en Redux
+    console.log("Carrito vaciado");
   };
 
   // Actualizar el contador de productos cuando cambia el carrito
   useEffect(() => {
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     setCartItemCount(totalItems);
-    {/*console.log("Total de productos en el carrito:", totalItems); */}
- 
   }, [cart]);
 
   return (

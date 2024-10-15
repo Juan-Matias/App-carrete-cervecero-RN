@@ -11,7 +11,7 @@ import DateTimeSelector from '../dateTime/DateTimePickerModal.js';
 import useFormValidation from '../../hooks/resumenFactura/useFormValidation.js';
 import useFacturacionLogic from '../../hooks/resumenFactura/useFacturacionLogic.js';
 
-const Facturacion = ({ isVisible, onClose, cart, total }) => {
+const Facturacion = ({ isVisible, onClose, cart, total, onCompraFinalizada }) => {
   const navigation = useNavigation(); // Inicializar la navegación
   const { formValues, errors, handleInputChange, validateForm, refs } = useFormValidation({
     address: '',
@@ -167,7 +167,8 @@ const Facturacion = ({ isVisible, onClose, cart, total }) => {
 
           {/* Botón de finalizar compra */}
           <View className="mt-6">
-            <Button mode="contained" onPress={handleFinalizarCompra}>
+            <Button mode="contained" onPress=
+            {handleFinalizarCompra}>
               Finalizar Compra
             </Button>
           </View>

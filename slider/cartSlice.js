@@ -27,9 +27,13 @@ const cartSlice = createSlice({
         }
       }
     },
-    // Otras acciones como emptyCart, etc.
+    // Acción para vaciar el carrito
+    clearCart: (state) => {
+      state.items = [];  // Limpiar el carrito
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions; // Exporta removeFromCart
+// Exportar las acciones
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions; // Asegúrate de incluir clearCart
 export default cartSlice.reducer;

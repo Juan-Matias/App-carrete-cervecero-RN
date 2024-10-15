@@ -32,7 +32,7 @@ const CardIProductos = ({ searchQuery }) => {
   // [Logica de Agregar , Contador]
   const handleAgregarProducto = (product) => {
     dispatch(addToCart(product)); // Usa dispatch para agregar el producto
-    console.log("Producto agregado:", product);
+    //console.log("Producto agregado:", product);
   };
 
   const getCantidadProducto = (productId) => {
