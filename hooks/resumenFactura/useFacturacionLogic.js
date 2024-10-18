@@ -69,43 +69,61 @@ const useFacturacionLogic = (cart, total, onClose, validateForm, formValues, isB
         Alert.alert('Error', 'Debes estar autenticado para realizar una compra.');
         return;
       }
-
-      try {
-        const purchaseData = {
-          userId,
-          address: formValues.address,
-          phone: formValues.phone,
-          city: formValues.selectedCity,
-          date: formValues.selectedDate,
-          time: formValues.selectedTime,
-          items: cart.map(item => ({
-            id: item._id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity
-          })),
-          total: total + additionalBarrelPrice + (isBartenderService ? bartenderPrice : 0),
-          createdAt: Timestamp.now()
-        };
-
-        // [ # Funcion ] - Guardar la compra en Firestore
-        await addDoc(collection(db, 'facturacion'), purchaseData);
-
-        //[ # Funcion ]- Limpiar Carrito
-        clearCart();
-
-        // Cerrar modal
-        onClose();
-        Alert.alert('Compra Exitosa', 'Tu compra fue procesada exitosamente.');
-        navigation.navigate('Orders'); // Navega de vuelta a la pantalla Home
-      } catch (error) {
-        Alert.alert('Error', `Error al procesar la compra: ${error.message}`);
-      }
+  
+      // Agregar alerta de confirmación
+      Alert.alert(
+        'Confirmar Compra',
+        '¿Realmente quieres hacer tu compra?',
+        [
+          {
+            text: 'No',
+            onPress: () => console.log('Compra cancelada'),
+            style: 'cancel',
+          },
+          {
+            text: 'Sí',
+            onPress: async () => {
+              try {
+                const purchaseData = {
+                  userId,
+                  address: formValues.address,
+                  phone: formValues.phone,
+                  city: formValues.selectedCity,
+                  date: formValues.selectedDate,
+                  time: formValues.selectedTime,
+                  items: cart.map(item => ({
+                    id: item._id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity
+                  })),
+                  total: total + additionalBarrelPrice + (isBartenderService ? bartenderPrice : 0),
+                  createdAt: Timestamp.now()
+                };
+  
+                // Guardar la compra en Firestore
+                await addDoc(collection(db, 'facturacion'), purchaseData);
+  
+                // Limpiar Carrito
+                clearCart();
+  
+                // Cerrar modal
+                onClose();
+                Alert.alert('Compra Exitosa', 'Tu compra fue procesada exitosamente.');
+                navigation.navigate('Orders'); // Navega de vuelta a la pantalla de pedidos
+              } catch (error) {
+                Alert.alert('Error', `Error al procesar la compra: ${error.message}`);
+              }
+            },
+          },
+        ],
+        { cancelable: false }
+      );
     } else {
       Alert.alert('Error', 'Hay errores en el formulario. Por favor corrígelos.');
     }
   };
-
+  
   return {
     communes,
     barrels,

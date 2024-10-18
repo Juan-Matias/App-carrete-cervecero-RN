@@ -33,10 +33,12 @@ const CardOrders = ({ orders, onRefresh, loading }) => {
     const simpleId = `Pedido #${index + 1}`; // Puedes personalizar esto según sea necesario
 
     return (
-      <Card style={{ marginVertical: 10 }}>
-        <Card.Title title={simpleId} />
+      <Card style={{ marginVertical: 10 }} className="bg-white">
+        <Card.Title title={
+          <Text className="text-lg text-blue-600 font-bold">{simpleId}</Text> // Cambia el color y tamaño
+        } />
         <Card.Content>
-          <Text>Dirección: {item.address}</Text>
+          <Text className="text-base">Dirección: {item.address}</Text>
           <Text>Total: ${formatNumber(item.total)}</Text> 
         </Card.Content>
         <Card.Actions>

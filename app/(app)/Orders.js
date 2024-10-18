@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Alert, Image } from 'react-native';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db, auth } from '../../conection/FireBaseConection/firebaseConfig.js';
+import { Card, Button } from 'react-native-paper'; // Para mostrar cada pedido en un Card y agregar un botón
 
 import CardOrders from '../../components/cart/CardOrders.js'; // Importar el componente de las órdenes
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -17,7 +18,8 @@ const Pedidos = () => {
   const fetchOrders = async () => {
     const userId = auth.currentUser?.uid;
     if (!userId) {
-      return; // Si no está autenticado, no hacemos nada
+      Alert.alert('Error', 'Debes estar autenticado para ver tus pedidos.');
+      return;
     }
 
     setLoading(true); // Inicia la carga
@@ -33,8 +35,11 @@ const Pedidos = () => {
 
       setOrders(userOrders);
 
+      if (userOrders.length === 0) {
+        Alert.alert('Información', 'Todavía no se ha agregado ningún producto.');
+      }
     } catch (error) {
-      console.error('Error al cargar los pedidos:', error);
+      Alert.alert('Error', `Error al cargar los pedidos: ${error.message}`);
     } finally {
       setLoading(false); // Finaliza la carga
     }
@@ -56,6 +61,19 @@ const Pedidos = () => {
           <Text className="mt-4 text-lg font-semibold text-gray-700 text-center">
             ¡Mmmmmmm! Parece que aún no añades ningún pedido a tu carrito.
           </Text>
+
+          <View className="pt-4">
+            <Button
+              mode="contained"
+              onPress={fetchOrders}
+              loading={loading}
+              disabled={loading}
+              className=" bg-amber-500 rounded-lg"
+              labelStyle={{ color: 'white' }}
+            >
+              Actualizar
+            </Button>
+          </View>
         </View>
       ) : (
         <CardOrders orders={orders} onRefresh={fetchOrders} loading={loading} /> 
