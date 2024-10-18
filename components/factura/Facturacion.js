@@ -44,7 +44,8 @@ const Facturacion = ({ isVisible, onClose, cart, total, onCompraFinalizada }) =>
       onBackdropPress={onClose}
       swipeDirection="down"
       onSwipeComplete={onClose}
-      style={{ justifyContent: 'flex-end', margin: 10 }}
+      avoidKeyboard={true}
+      style={{ justifyContent: 'flex-end', margin: 10, }}
     >
       <CustomKeyboardView>
         <View className="bg-white p-4 rounded-t-lg pt-10">
