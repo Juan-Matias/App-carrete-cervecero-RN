@@ -1,39 +1,65 @@
 import { useState, useRef } from "react";
 
-const useFormValidation = (initialState) => {
-  const [formValues, setFormValues] = useState(initialState);
+const useFormValidation = (initialValues, validations) => {
+  const [formValues, setFormValues] = useState({
+    ...initialValues,
+    date: "", // Agregar fecha
+    time: "", // Agregar hora
+  });
+
   const [errors, setErrors] = useState({});
 
   // Referencias para los inputs
-  const addressRef = useRef(null);
-  const phoneRef = useRef(null);
-  const cityRef = useRef(null);
-
-  // Función para manejar los cambios en los inputs
-  const handleInputChange = (name, value) => {
-    setFormValues({ ...formValues, [name]: value });
+  const refs = {
+    addressRef: useRef(null),
+    phoneRef: useRef(null),
+    dateRef: useRef(null),
+    timeRef: useRef(null),
   };
 
-  // Función para validar el formulario y hacer focus en el primer campo con error
-  const validateForm = () => {
-    const newErrors = {};
+  const handleInputChange = (field, value) => {
+    setFormValues((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
 
-    // Validar campos en un solo 'if-else' con focus
-    if (!formValues.address) {
-      newErrors.address = "La dirección de envío es obligatoria.";
-      addressRef.current?.focus(); // Hacer focus en el campo de dirección
-    } else if (!formValues.phone || !/^\d{9}$/.test(formValues.phone)) {
-      newErrors.phone = "Número de teléfono no válido. Debe tener 9 dígitos.";
-      phoneRef.current?.focus(); // Hacer focus en el campo de teléfono
-    } else if (!formValues.selectedCity) {
-      newErrors.city = "Debe seleccionar una ciudad.";
-      cityRef.current?.focus(); // Hacer focus en el campo de ciudad
+    // Si hay un error para este campo, lo eliminamos cuando el usuario empieza a escribir
+    if (errors[field]) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: null,
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    let newErrors = {};
+
+    // Validar cada campo usando las funciones de validación proporcionadas
+    Object.keys(validations).forEach((field) => {
+      if (validations[field]) {
+        const error = validations[field](formValues[field]);
+        if (error) {
+          newErrors[field] = error;
+          isValid = false;
+        }
+      }
+    });
+
+    // Validaciones específicas para fecha y hora
+    if (!formValues.date) {
+      newErrors.date = "La fecha es requerida";
+      isValid = false;
+    }
+
+    if (!formValues.time) {
+      newErrors.time = "La hora es requerida";
+      isValid = false;
     }
 
     setErrors(newErrors);
-
-    // Si no hay errores, retorna true, de lo contrario false
-    return Object.keys(newErrors).length === 0;
+    return isValid;
   };
 
   return {
@@ -41,12 +67,7 @@ const useFormValidation = (initialState) => {
     errors,
     handleInputChange,
     validateForm,
-    // Exponemos las referencias para poder asignarlas a los inputs en el componente
-    refs: {
-      addressRef,
-      phoneRef,
-      cityRef,
-    },
+    refs,
   };
 };
 

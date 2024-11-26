@@ -106,6 +106,8 @@ const useFacturacionLogic = (
                   address: formValues.address,
                   phone: formValues.phone,
                   city: formValues.selectedCity,
+                  date: formValues.date,
+                  time: formValues.time,
                   items: cart.map((item) => ({
                     id: item._id,
                     name: item.name,

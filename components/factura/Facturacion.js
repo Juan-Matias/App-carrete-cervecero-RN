@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CustomKeyboardView from "../keyboard/CustomKeyboardView.js";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import useFormValidation from "../../hooks/resumenFactura/useFormValidation.js";
 import useFacturacionLogic from "../../hooks/resumenFactura/useFacturacionLogic.js";
@@ -24,6 +25,8 @@ const Facturacion = ({
   const navigation = useNavigation();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
@@ -35,6 +38,8 @@ const Facturacion = ({
       address: "",
       phone: "",
       selectedCity: "",
+      date: "",
+      time: "",
     }, {
       address: (value) => {
         if (!value) return t('facturacion.errores.direccionRequerida');
@@ -49,8 +54,32 @@ const Facturacion = ({
       selectedCity: (value) => {
         if (!value) return t('facturacion.errores.ciudadRequerida');
         return null;
+      },
+      date: (value) => {
+        if (!value) return "La fecha es requerida";
+        return null;
+      },
+      time: (value) => {
+        if (!value) return "La hora es requerida";
+        return null;
       }
     });
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      handleInputChange("date", formattedDate);
+    }
+  };
+
+  const handleTimeChange = (event, selectedTime) => {
+    setShowTimePicker(false);
+    if (selectedTime) {
+      const formattedTime = selectedTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      handleInputChange("time", formattedTime);
+    }
+  };
 
   const bartenderPrice = 15000; // Precio del servicio de bartender
   const [isBartenderService, setIsBartenderService] = useState(false);
@@ -107,6 +136,54 @@ const Facturacion = ({
         <View className="bg-white p-4 rounded-t-lg pt-10">
           <Spinner visible={isLoading} />
           <Text className="text-lg font-semibold mb-4">{t('facturacion.titulo')}</Text>
+          
+          {/* Campos de fecha y hora */}
+          <View className="flex-row gap-2 justify-between mb-4">
+            <View className="flex-1">
+              <Button
+                mode="outlined"
+                onPress={() => setShowDatePicker(true)}
+                className="bg-gray-100"
+              >
+                {formValues.date || "Seleccionar Fecha"}
+              </Button>
+              {errors.date && (
+                <Text className="text-red-500 text-sm">{errors.date}</Text>
+              )}
+            </View>
+            <View className="flex-1">
+              <Button
+                mode="outlined"
+                onPress={() => setShowTimePicker(true)}
+                className="bg-gray-100"
+              >
+                {formValues.time || "Seleccionar Hora"}
+              </Button>
+              {errors.time && (
+                <Text className="text-red-500 text-sm">{errors.time}</Text>
+              )}
+            </View>
+          </View>
+
+          {showDatePicker && (
+            <DateTimePicker
+              value={formValues.date ? new Date(formValues.date) : new Date()}
+              mode="date"
+              display="default"
+              onChange={handleDateChange}
+              minimumDate={new Date()}
+            />
+          )}
+
+          {showTimePicker && (
+            <DateTimePicker
+              value={formValues.time ? new Date(`2000-01-01T${formValues.time}`) : new Date()}
+              mode="time"
+              display="default"
+              onChange={handleTimeChange}
+            />
+          )}
+
           <View className="flex-row gap-2 justify-center">
             <TextInput
               ref={refs.addressRef}
