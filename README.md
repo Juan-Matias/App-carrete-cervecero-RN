@@ -1,7 +1,7 @@
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
+https://www.canva.com/design/DAGSi4kLQtw/H7pLGaWFI8n8ebpMDQo-Fg/edit?utm_content=DAGSi4kLQtw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ## Get started
 
 1. Install dependencies
