@@ -1,14 +1,30 @@
+## 🎉 ¡Bienvenidos a mi proyecto en React Native!
+
+![Background](https://github.com/Juan-Matias/App-carrete-cervecero-RN/blob/49dae6ff565ac32b37f57781d646c769ec9c167a/Backgorund.png)
+🚀 He desarrollado una aplicación multiplataforma que funciona tanto en Android como en iOS, diseñada para simplificar la gestión de reservas de manera eficiente y accesible.
+
+📲 Características principales:
+Gestión de Credenciales: Registro e inicio de sesión seguro para los usuarios, con autenticación en tiempo real.
+Panel Principal | Home: Interfaz intuitiva que permite a los usuarios navegar fácilmente por los servicios disponibles.
+Reserva de Productos | Carrito: Los usuarios pueden seleccionar y confirmar servicios de manera rápida y eficiente, manteniendo un proceso claro y fluido.
+Gestión de Cuenta: Herramientas personalizadas para los usuarios, incluyendo la posibilidad de editar su perfil, ver historial de reservas y mucho más.
+
+⚙️ Stack de Tecnologías Utilizadas:
+Frontend: React Native, Tailwind CSS para estilos, Redux para manejo del estado.
+Backend: Firebase para la autenticación y base de datos en tiempo real, Sanity para la gestión de contenido, Node.js para la creación de servicios backend.
+
+💡 Objetivo del Proyecto:
+Esta aplicación está diseñada como una herramienta de gestión que optimiza el proceso de reservas y mejora la experiencia del usuario final, brindando una interfaz limpia, fácil de usar y altamente funcional.
+
+Mira el video aquí: [Demo en YouTube](https://www.youtube.com/watch?v=8oy47g0rXwA)
+
+
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-https://www.canva.com/design/DAGSi4kLQtw/H7pLGaWFI8n8ebpMDQo-Fg/edit?utm_content=DAGSi4kLQtw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 ## Get started
-
-## Background
-
-![Background](https://github.com/Juan-Matias/App-carrete-cervecero-RN/blob/49dae6ff565ac32b37f57781d646c769ec9c167a/Backgorund.png)
-
-Mira el video aquí: [Demo en YouTube](https://www.youtube.com/watch?v=8oy47g0rXwA)
 
 1. Install dependencies
 
