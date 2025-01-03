@@ -4,6 +4,9 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 https://www.canva.com/design/DAGSi4kLQtw/H7pLGaWFI8n8ebpMDQo-Fg/edit?utm_content=DAGSi4kLQtw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ## Get started
 
+backgorund
+
+https://github.com/Juan-Matias/App-carrete-cervecero-RN/blob/49dae6ff565ac32b37f57781d646c769ec9c167a/Backgorund.png
 Mira el video aquí: [Demo en YouTube](https://www.youtube.com/watch?v=8oy47g0rXwA)
 
 
