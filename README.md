@@ -4,6 +4,9 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 https://www.canva.com/design/DAGSi4kLQtw/H7pLGaWFI8n8ebpMDQo-Fg/edit?utm_content=DAGSi4kLQtw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ## Get started
 
+Mira el video aquí: [Demo en YouTube](https://www.youtube.com/watch?v=8oy47g0rXwA)
+
+
 1. Install dependencies
 
    ```bash
