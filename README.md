@@ -4,10 +4,10 @@
 🚀 He desarrollado una aplicación multiplataforma que funciona tanto en Android como en iOS, diseñada para simplificar la gestión de reservas de manera eficiente y accesible.
 
 📲 Características principales:
-Gestión de Credenciales: Registro e inicio de sesión seguro para los usuarios, con autenticación en tiempo real.
-Panel Principal | Home: Interfaz intuitiva que permite a los usuarios navegar fácilmente por los servicios disponibles.
-Reserva de Productos | Carrito: Los usuarios pueden seleccionar y confirmar servicios de manera rápida y eficiente, manteniendo un proceso claro y fluido.
-Gestión de Cuenta: Herramientas personalizadas para los usuarios, incluyendo la posibilidad de editar su perfil, ver historial de reservas y mucho más.
+- Gestión de Credenciales: Registro e inicio de sesión seguro para los usuarios, con autenticación en tiempo real.
+- Panel Principal | Home: Interfaz intuitiva que permite a los usuarios navegar fácilmente por los servicios disponibles.
+- Reserva de Productos | Carrito: Los usuarios pueden seleccionar y confirmar servicios de manera rápida y eficiente, manteniendo un proceso claro y fluido.
+- Gestión de Cuenta: Herramientas personalizadas para los usuarios, incluyendo la posibilidad de editar su perfil, ver historial de reservas y mucho más.
 
 ⚙️ Stack de Tecnologías Utilizadas:
 Frontend: React Native, Tailwind CSS para estilos, Redux para manejo del estado.
